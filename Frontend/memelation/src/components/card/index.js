@@ -1,10 +1,10 @@
 import React from 'react'
 import {MomWrapper, Caard, ImageCard, TextCard, Span, H2, CardStats, Stat, Value, Type, CardStatBorder, Sup } from './styled'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
-export default function Card({imagem,categoria,autor,hashtags,alt}){
+export default function Card({imagem,categoria,autor,hashtags,alt,curtir,curtidas}){
     function Random(){
         const result = Math.round(Math.random() *10)
         return result;
@@ -37,6 +37,11 @@ export default function Card({imagem,categoria,autor,hashtags,alt}){
                             pathname:'/delete',
                             state:alt }}>Excluir</Link>
                     </span>
+                    <div>
+                        <button onClick={curtir}>Curtir</button>
+                        <span>{curtidas}</span>
+                    </div>
+                   
                 </TextCard>
 
                 <CardStats>

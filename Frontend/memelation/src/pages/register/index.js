@@ -14,7 +14,7 @@ export default function Register(){
 
     const salvarClick = async () => {
         try{
-            const resp = await api.register({
+            const resp = await api.cadastrar({
                 autor:autor,
                 categoria:categoria,
                 hashtags:hashtags,

@@ -1,58 +1,59 @@
-import axios from "axios";
+import axios from 'axios'
 
 const api = axios.create({
-  baseURL: "https://nsf-lista-negra.herokuapp.com"
-});
+  baseURL: "localhost:500"
+})
 
-export default class MemelationApi {
-  async cadastrar(ml) {
-    console.log(ml);
+export default class memelation {
 
-    let formData = new FormData();
-    formData.append("autor", ml.autor);
-    formData.append("categoria", ml.categoria);
-    formData.append("hashtags", ml.hashtags);
-    formData.append("maior", ml.maior);
-    formData.append("imagem", ml.imagem);
-
-    const resp = await api.post("/Memelation", formData, {
-      headers: { "content-type": "multipart/form-data" }
-    });
-    console.log(resp);
-    return resp;
+  async cadastrar({autor,categoria,hashtags,imagem,maior}){
+    const formdata = new FormData()
+    formdata.append('autor',autor)
+    formdata.append('categoria', categoria)
+    formdata.append('hahstags',hashtags)
+    formdata.append('maior',maior)
+    formdata.append('imagem',imagem)
+    const response =  await api.post(`/Meme`,formdata,{
+       headers: { "content-type": "multipart/form-data" }
+    })
+    return response.data
   }
 
-  async consultar() {
-    const resp = await api.get("/Memelation");
-
-    return resp.data;
+  async deletar(id){
+    const response = await api.delete(`/Meme/${id}`)
+    return response.data
   }
 
-  buscarImagem(foto) {
-    const urlFoto = api.defaults.baseURL + "/Memelation/foto/" + foto;
-    console.log(urlFoto);
-
-    return urlFoto;
+  async consultar(maior){
+    const response =  await api.get(`/Meme?maior=${maior}`)
+    return response.data
   }
 
-  async deletar(id) {
-    const resp = await api.delete(`/Memelation/${id}`);
-
-    return resp.data;
+  async adicionarcurtidas(id){
+    const response =  await api.post(`/Meme/Curtida/${id}`)
+    return response.data
   }
 
-  async alterar(id, ml) {
-    let formData = new FormData();
-    formData.append("autor", ml.autor);
-    formData.append("categoria", ml.categoria);
-    formData.append("hashtags", ml.hashtags);
-    formData.append("maior", ml.maior);
-    formData.append("imagem", ml.imagem);
-
-    const resp = await api.put(`/Memelation/${id}`, formData, {
-      headers: { "content-type": "multipart/form-data" }
-    });
-
-    return resp.data;
+  buscarFoto(nome){
+    const response = api.get(`/Meme/Foto/${nome}`)
+    return response.data
   }
-}
+
+  async alterarComFoto({autor,categoria,hashtags,imagem,maior},id){
+    const formdata = new FormData()
+    formdata.append('autor',autor)
+    formdata.append('categoria', categoria)
+    formdata.append('hahstags',hashtags)
+    formdata.append('maior',maior)
+    formdata.append('imagem',imagem)
+    const response =  await api.put(`/Meme/AltFoto/${id}`,formdata,{
+       headers: { "content-type": "multipart/form-data" }
+    })
+    return response.data
+  }
+
+  async alterar(id,props){
+    const response = await api.put(`/Meme/${id}`,props)
+    return response.data
+  }
+} 
