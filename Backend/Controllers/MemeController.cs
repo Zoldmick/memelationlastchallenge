@@ -88,6 +88,7 @@ namespace memelationlastchallenge.Controllers
         {
             try
             {
+                
                 byte[] foto = gerenciadorFoto.LerFoto(nome);
                 return File(foto,gerenciadorFoto.GerarContentType(nome));
             }
@@ -105,7 +106,6 @@ namespace memelationlastchallenge.Controllers
             {
                 Models.TbMemelation meme = conv.ForTable(req);
                 meme.DsImagem = gerenciadorFoto.GerarNovoNome(req.imagem.FileName);
-
                 meme = buss.alterar(id,meme);
                 gerenciadorFoto.SalvarFoto(meme.DsImagem,req.imagem);
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: "localhost:500"
+  baseURL: "http://localhost:5000"
 })
 
 export default class memelation {
@@ -31,7 +31,7 @@ export default class memelation {
 
   async adicionarcurtidas(id){
     const response =  await api.post(`/Meme/Curtida/${id}`)
-    return response.data
+    return response
   }
 
   buscarFoto(nome){
@@ -39,13 +39,13 @@ export default class memelation {
     return response.data
   }
 
-  async alterarComFoto({autor,categoria,hashtags,imagem,maior},id){
+  async alterarComFoto(id,props){
     const formdata = new FormData()
-    formdata.append('autor',autor)
-    formdata.append('categoria', categoria)
-    formdata.append('hahstags',hashtags)
-    formdata.append('maior',maior)
-    formdata.append('imagem',imagem)
+    formdata.append('autor',props.autor)
+    formdata.append('categoria', props.categoria)
+    formdata.append('hashtags',props.hashtags)
+    formdata.append('maior',props.maior)
+    formdata.append('imagem',props.imagem)
     const response =  await api.put(`/Meme/AltFoto/${id}`,formdata,{
        headers: { "content-type": "multipart/form-data" }
     })

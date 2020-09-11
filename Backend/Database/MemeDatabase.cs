@@ -36,6 +36,7 @@ namespace memelationlastchallenge.Database
            ctx.SaveChanges();
            return alt;
         }
+
         public Models.TbMemelation deletar(Models.TbMemelation del)
         {
             ctx.TbMemelation.Remove(del);
@@ -54,6 +55,7 @@ namespace memelationlastchallenge.Database
             ctx.SaveChanges();
             return ml;
         }
+        
         public Models.TbMemelation consultarPorID(int id)
         {
             return ctx.TbMemelation.FirstOrDefault(x => x.IdMeme == id);

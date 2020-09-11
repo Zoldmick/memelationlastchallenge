@@ -23,12 +23,12 @@ namespace memelationlastchallenge.Business
             if (string.IsNullOrEmpty(ml.DsCategoria))
                 throw new Exception("Categoria é obrigatório.");
             if (string.IsNullOrEmpty(ml.DsHashtags))
-                throw new Exception("Hashtag é obrigatório.");
+                throw new Exception("Hashtag " + ml.DsHashtags + " é obrigatório.");
                 
             return data.inserir(ml);
         }
 
-        public Models.TbMemelation deletar (int id)
+        public Models.TbMemelation deletar(int id)
         {
             Models.TbMemelation meme = data.consultarPorID(id);
             if(meme == null)
@@ -53,7 +53,7 @@ namespace memelationlastchallenge.Business
             if (string.IsNullOrEmpty(alt.DsCategoria))
                 throw new Exception("Categoria é obrigatório.");
             if (string.IsNullOrEmpty(alt.DsHashtags))
-                throw new Exception("Hashtag é obrigatório.");
+                throw new Exception("Hashtag " + alt.DsHashtags + " é obrigatório.");
 
             return data.alterar(id,alt);
         }

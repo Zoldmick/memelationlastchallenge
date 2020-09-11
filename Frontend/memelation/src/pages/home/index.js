@@ -6,13 +6,9 @@ import memelation from '../../services/memelation'
 import { Link } from 'react-router-dom'
 import Card from '../../components/card'
 import "react-multi-carousel/lib/styles.css"
-import Comentario from '../../services/comentario'
 const apiMeme = new memelation()
-const apiComentario = new Comentario()
 
 export default function HomePage(){
-
-    const [comentario,setComentario] = useState('') 
     const [req,setReq] = useState([])
     const responsive = {
         superLargeDesktop: {
@@ -34,27 +30,15 @@ export default function HomePage(){
       }
 
     const consultClick = async () => {
-       try{
-          const resp = await apiMeme.consultar(false)
-          setReq(...resp)
+       try { 
+          const resp = await apiMeme.consultar(true)
+          console.log(resp)
+          setReq(resp)
        }
        catch(e){
-          toast.error(e.response.data.erro)
+          toast.error("Algo deu errado")
        }
     }
-    const comentarioClick = async (id) => {
-      try{
-        const resp = await apiComentario.cadastrarComentario({
-          id:id,
-          comentario:comentario
-        })
-      }
-      catch(e){
-        toast.error(e.response.data.erro)
-      }
-    }
-
-
     useEffect(() => {
         consultClick()
     },[])    
@@ -67,28 +51,15 @@ export default function HomePage(){
             <Carousel responsive={responsive}>
                 {req.map(x =>  
                 <>    
-                    <Card key={x.id} 
+                    <Card 
                       imagem={apiMeme.buscarFoto(x.imagem)}
                       categoria={x.categoria}
                       autor={x.autor}
                       hashtags={x.hashtags}
                       alt={x}
                       curtidas={x.curtidas}
-                      curtir={() => await apiMeme.adicionarcurtidas(x.id)}/>
-                    <div>
-                      <input type="text" placeholder="Comentar" 
-                      onChange={e => setComentario(e.target.value)} 
-                      value={comentario}/>
-                      <button onClick={e => comentarioClick(x.id)}>Enviar</button>
-                    </div>
-                    <div>
-                      {x.comentarios.map(y => 
-                        <>
-                          <div>{y.comentario}</div>
-                          <button onClick={apiComentario.deletarComentario(y.id)}>Deletar</button>
-                        </>
-                        )}
-                    </div>
+                      id={x.id}
+                    />
                 </>
                 )}
             </Carousel>

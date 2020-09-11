@@ -33,7 +33,6 @@ export default function AdultMeme(){
         try{
             const con = await api.consult()
             setReq([...con])
-
         }
         catch(e){
             toast.error(e.response.data.erro)
@@ -43,7 +42,6 @@ export default function AdultMeme(){
     useEffect(() => {
         adultMemeClick()
     },[])    
-
     return(
         <div>
             <ToastContainer />

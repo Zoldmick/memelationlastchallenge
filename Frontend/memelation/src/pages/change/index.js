@@ -1,11 +1,12 @@
 import React,{ useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import memelation from '../../services/memelation'
 import 'react-toastify/dist/ReactToastify.css'
 const api = new memelation()
 
 export default function Change(props){
+    const his = useHistory()
     const [id] = useState(props.location.state.id)
     const [autor,setAutor] = useState(props.location.state.autor)
     const [categoria,setCategoria] = useState(props.location.state.categoria)
@@ -28,12 +29,11 @@ export default function Change(props){
 
             if(typeof imagem === "string"){
                const resp =  await api.alterar(id,req)
-               return resp
             }
             else {
                 const resp = await api.alterarComFoto(id,req)
-                return resp
             }
+            his.goBack()
             toast('Sucess')
         }
         catch(e){
