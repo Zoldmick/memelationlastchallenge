@@ -88,7 +88,6 @@ namespace memelationlastchallenge.Controllers
         {
             try
             {
-                
                 byte[] foto = gerenciadorFoto.LerFoto(nome);
                 return File(foto,gerenciadorFoto.GerarContentType(nome));
             }

@@ -10,33 +10,36 @@ export default class memelation {
     const formdata = new FormData()
     formdata.append('autor',autor)
     formdata.append('categoria', categoria)
-    formdata.append('hahstags',hashtags)
+    formdata.append('hashtags',hashtags)
     formdata.append('maior',maior)
     formdata.append('imagem',imagem)
-    const response =  await api.post(`/Meme`,formdata,{
+    console.log(hashtags)
+    const response =  await api.post(`Meme`,formdata,{
        headers: { "content-type": "multipart/form-data" }
     })
     return response.data
   }
 
   async deletar(id){
-    const response = await api.delete(`/Meme/${id}`)
+    const response = await api.delete(`Meme/${id}`)
     return response.data
   }
 
   async consultar(maior){
-    const response =  await api.get(`/Meme?maior=${maior}`)
+    console.log(maior)
+    const response =  await api.get(`Meme?maior=${maior}`)
+    console.dir(response.data)
     return response.data
   }
 
   async adicionarcurtidas(id){
-    const response =  await api.post(`/Meme/Curtida/${id}`)
+    const response =  await api.post(`Meme/Curtida/${id}`)
     return response
   }
 
   buscarFoto(nome){
-    const response = api.get(`/Meme/Foto/${nome}`)
-    return response.data
+    const url =  `${api.defaults.baseURL}/Meme/Foto/${nome}`
+    return url; 
   }
 
   async alterarComFoto(id,props){
@@ -46,14 +49,14 @@ export default class memelation {
     formdata.append('hashtags',props.hashtags)
     formdata.append('maior',props.maior)
     formdata.append('imagem',props.imagem)
-    const response =  await api.put(`/Meme/AltFoto/${id}`,formdata,{
+    const response =  await api.put(`Meme/AltFoto/${id}`,formdata,{
        headers: { "content-type": "multipart/form-data" }
     })
     return response.data
   }
 
   async alterar(id,props){
-    const response = await api.put(`/Meme/${id}`,props)
+    const response = await api.put(`Meme/${id}`,props)
     return response.data
   }
 } 

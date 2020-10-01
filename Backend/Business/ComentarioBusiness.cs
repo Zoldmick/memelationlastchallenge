@@ -1,5 +1,4 @@
 using System;
-
 namespace memelationlastchallenge.Business
 {
     public class ComentarioBusiness

@@ -8,7 +8,7 @@ const api = new memelation()
 export default function Register(){
     const [autor,setAutor] = useState('')
     const [categoria,setCategoria] = useState('')
-    const [hashtags,setHashtags] = useState('')
+    const [hashtags,setHashtags] = useState('#')
     const [maior,setMaior] = useState(false)
     const [imagem,setImagem] = useState()
 

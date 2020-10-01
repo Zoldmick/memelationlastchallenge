@@ -22,7 +22,7 @@ namespace memelationlastchallenge.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;userid=root;password=1234;database=memelation", x => x.ServerVersion("5.7.30-mysql"));
+                optionsBuilder.UseMySql("server=localhost;userid=root;password=1234;database=memelation", x => x.ServerVersion("8.0.21-mysql"));
             }
         }
 
@@ -37,13 +37,12 @@ namespace memelationlastchallenge.Models
                     .HasName("id_meme");
 
                 entity.Property(e => e.DsComentario)
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.HasOne(d => d.IdMemeNavigation)
                     .WithMany(p => p.TbComentario)
                     .HasForeignKey(d => d.IdMeme)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tb_comentario_ibfk_1");
             });
 
@@ -53,21 +52,21 @@ namespace memelationlastchallenge.Models
                     .HasName("PRIMARY");
 
                 entity.Property(e => e.DsCategoria)
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.DsHashtags)
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.DsImagem)
                     .HasDefaultValueSql("'user.jpg'")
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.NmAutor)
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             OnModelCreatingPartial(modelBuilder);

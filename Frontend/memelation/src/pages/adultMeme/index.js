@@ -1,8 +1,8 @@
 import React,{ useState, useEffect } from 'react'
 import Carousel from 'react-multi-carousel'
-import { useHistory } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Link } from 'react-router-dom'
 import memelation from '../../services/memelation'
 import "react-multi-carousel/lib/styles.css"
 import Card from '../../components/card'
@@ -27,15 +27,15 @@ export default function AdultMeme(){
           breakpoint: { max: 464, min: 0 },
           items: 1
         }
-      }
-    const his = useHistory()  
+      }  
     const adultMemeClick = async () => {
         try{
-            const con = await api.consult()
-            setReq([...con])
+            const resp = await api.consultar(true)
+            console.log(resp)
+            setReq([...resp])
         }
         catch(e){
-            toast.error(e.response.data.erro)
+            toast.error(e.response.data.error)
         }
     }
 
@@ -47,17 +47,21 @@ export default function AdultMeme(){
             <ToastContainer />
             <h1>Memes adultos</h1>
             <Carousel responsive={responsive}>
-                {req.filter(x => x.maior).map(x =>                 
-                    <Card imagem={api.getPhoto(x.imagem)}
-                    categoria={x.categoria}
-                    autor={x.autor}
-                    hashtags={x.hashtags}
-                    alt={x}/>
+                {req.map(x =>                 
+                    <Card 
+                        imagem={x.imagem}
+                        categoria={x.categoria}
+                        autor={x.autor}
+                        hashtags={x.hashtags}
+                        alt={x}
+                        curtidas={x.curtidas}
+                        id={x.id}
+                    />
                 )}
             </Carousel>
-            <button onClick={() => his.goBack()}>
+            <Link to='/'>
                 Voltar ao menu
-            </button>
+            </Link>
         </div>
     )
 }

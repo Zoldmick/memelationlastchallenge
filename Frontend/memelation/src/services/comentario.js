@@ -7,6 +7,7 @@ const api = axios.create({
 export default class comentario {
     
     async cadastrarComentario(props){
+        console.log(props)
         const response =  await api.post(`/Comentario`,props)
         return response.data
       }

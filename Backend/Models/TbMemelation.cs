@@ -14,7 +14,7 @@ namespace memelationlastchallenge.Models
         }
 
         [Key]
-        [Column("id_meme", TypeName = "int(11)")]
+        [Column("id_meme")]
         public int IdMeme { get; set; }
         [Required]
         [Column("nm_autor", TypeName = "varchar(100)")]
@@ -30,9 +30,9 @@ namespace memelationlastchallenge.Models
         [Required]
         [Column("ds_imagem", TypeName = "varchar(255)")]
         public string DsImagem { get; set; }
-        [Column("qtd_curtidas", TypeName = "int(11)")]
+        [Column("qtd_curtidas")]
         public int QtdCurtidas { get; set; }
-        [Column("dt_inclusao", TypeName = "date")]
+        [Column("dt_inclusao", TypeName = "datetime")]
         public DateTime? DtInclusao { get; set; }
 
         [InverseProperty("IdMemeNavigation")]

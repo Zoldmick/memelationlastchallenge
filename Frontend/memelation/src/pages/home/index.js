@@ -6,6 +6,7 @@ import memelation from '../../services/memelation'
 import { Link } from 'react-router-dom'
 import Card from '../../components/card'
 import "react-multi-carousel/lib/styles.css"
+import Comentario from '../../components/comentario'
 const apiMeme = new memelation()
 
 export default function HomePage(){
@@ -31,14 +32,15 @@ export default function HomePage(){
 
     const consultClick = async () => {
        try { 
-          const resp = await apiMeme.consultar(true)
+          const resp = await apiMeme.consultar(false)
           console.log(resp)
           setReq(resp)
        }
        catch(e){
-          toast.error("Algo deu errado")
+          toast.error(e.response.data.error)
        }
     }
+
     useEffect(() => {
         consultClick()
     },[])    
@@ -49,10 +51,10 @@ export default function HomePage(){
             <h1>Consultar carroussel</h1>
             <Link to='/register'>Cadastro</Link>
             <Carousel responsive={responsive}>
-                {req.map(x =>  
-                <>    
+                {req.map(x =>    
+                <>
                     <Card 
-                      imagem={apiMeme.buscarFoto(x.imagem)}
+                      imagem={x.imagem}
                       categoria={x.categoria}
                       autor={x.autor}
                       hashtags={x.hashtags}
@@ -60,6 +62,10 @@ export default function HomePage(){
                       curtidas={x.curtidas}
                       id={x.id}
                     />
+                    <Comentario 
+                      id={x.id}
+                      comentarios={x.comentarios}
+                      />
                 </>
                 )}
             </Carousel>

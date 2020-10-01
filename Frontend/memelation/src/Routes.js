@@ -12,7 +12,7 @@ export default function Routes(){
     return (
         <BrowserRouter>
             <Switch>
-                <Route path='/' exact={true} component={home}/>
+                <Route path='/' exact component={home}/>
                 <Route path='/Meme' component={adultMeme}/>
                 <Route path='/register' component={register}/>
                 <Route path='/change' component={change}/>

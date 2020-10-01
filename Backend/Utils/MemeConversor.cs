@@ -12,7 +12,7 @@ namespace memelationlastchallenge.Utils
             return new Models.TbMemelation {
                 DtInclusao = DateTime.Now,
                 DsCategoria = req.categoria,
-                DsHashtags = req.hashtags,
+                DsHashtags = req.hashtags.Replace("#",""),
                 NmAutor = req.autor,
                 BtMaior = req.maior
             };
