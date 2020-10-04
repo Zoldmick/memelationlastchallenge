@@ -1,11 +1,17 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { Link, useHistory } from 'react-router-dom'
+import { Input, Text, Checkbox, Button } from './styled'
 import memelation from '../../services/memelation'
 import 'react-toastify/dist/ReactToastify.css'
 const api = new memelation()
 
 export default function Change(props){
+
+    if(props.location.state == undefined ){
+        window.location.replace("http://localhost:3000/")
+    }
+
     const his = useHistory()
     const [id] = useState(props.location.state.id)
     const [autor,setAutor] = useState(props.location.state.autor)
@@ -41,39 +47,48 @@ export default function Change(props){
             else toast.error("Algo deu errado. Tente novamente")
         } 
     }
+    const Limpar = () => {
+        setAutor('')
+        setCategoria('')
+        setImagem()
+        setMaior(false)
+        setHashtags('#')
+    }
 
     return(
         <div>
             <ToastContainer />
-            <h1>Alterar meme</h1>
-            <div>
-                <label>Autor</label>
-                <input type='text' value={autor}
-                onChange={e => setAutor(e.target.value)}/>
-            </div>
-            <div>
-                <label>Categoria</label>
-                <input type='text' value={categoria}
-                onChange={e => setCategoria(e.target.value)}/>
-            </div>
-            <div>
-                <label>Hashtags</label>
-                <input type='text' value={hashtags}
-                onChange={e => setHashtags(e.target.value)}/>
-            </div>
-            <div>
-                <label>Maior</label>
-                <input type='radio' value={maior}
-                onChange={e => setMaior(e.target.checked)}/>
-            </div>
-            <div>
-                <label>Imagem</label>
-                <input type='file' 
-                onChange={e => setImagem(e.target.files[0])}/>
-            </div>
-            <button onClick={changeClick}>
-                Salvar
-            </button>
+            <h1 align="center">ALTERAR MEME</h1>
+            <form method="get">
+                <div>
+                    <Text>Autor</Text>
+                    <Input type='text' value={autor}
+                    onChange={e => setAutor(e.target.value)}/>
+                </div>
+                <div>
+                    <Text>Categoria</Text>
+                    <Input type='text' value={categoria}
+                    onChange={e => setCategoria(e.target.value)}/>
+                </div>
+                <div>
+                    <Text>Hashtags</Text>
+                    <Input type='text' value={hashtags}
+                    onChange={e => setHashtags(e.target.value)}/>
+                </div>
+                <div>
+                    <Text>Maior</Text>
+                    <Checkbox type='checkbox' value={maior}
+                    onChange={e => setMaior(e.target.checked)}/>
+                </div>
+                <div>
+                    <Text>Imagem</Text>
+                    <input type='file' className="btn" accept="image/*" onChange={e => setImagem(e.target.files[0])}/>
+                </div>
+            </form>
+            <br />
+            <Button type="submit" className="btn btn-primary" onClick={changeClick} value="Salvar"/> <wbr />
+            <Button type="reset" className="btn btn-secondary" value="Limpar" onClick={Limpar}/>
+            <br />
             <Link to='/'>Voltar ao menu</Link>
         </div>
     )

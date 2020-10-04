@@ -18,24 +18,33 @@ export const Caard = styled.div`
  
     font-family: 'Times New Roman', Times, serif;
     border-radius: 18px;
-    background: green;
+    background: #deb887;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
     text-align: center;
 
     transition: 0.5s ease;
     cursor:pointer;
 
+    @media  (max-width: 800px){
+        grid-template-columns: 265px;
+        grid-template-rows: 200px 200px 80px;
+        background-color:#deb890;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.9);
+    }
+
     &:hover{
-        transform:scale(1.2);
+        transform:scale(1.1);
+        margin-bottom:20px;
         box-shadow:5px 5px 15px rgba(0,0,0,0.9);
     }
 `;
 
-export const ImageCard = styled.div`
-    grid-area: image;
+export const ImageCard = styled.img`  
     border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    background-size: cover;
+    border-top-right-radius: 15px; 
+    margin:0 auto;
+    width:100%;
+    height:100%;
 `;
 
 export const TextCard = styled.div`
@@ -44,13 +53,32 @@ export const TextCard = styled.div`
 `;
 
 export const Span = styled.span`
-    color:rgb(255, 7, 110);
+    color:rgb(90, 60, 40);
+    font-family: "Comic sans MS";
+    font-weight:bolder;
+    display:block;
+    text-transform:uppercase;
     font-size:13px;
+`;
+
+export const Curtidas = styled.span`
+    float:right;
+    margin-top:20px;
+    font-size:16pt;
+    color:rgba(10,30,90);
+    font-weight:bold;
 `;
 
 export const H2 = styled.h2`
     margin-top:0px;
+    font-family:"Comic sans MS";
+    color:rgba(150,10,10);
     font-size:28px;
+
+    &:hover{
+        color:rgba(170,20,1);
+        font-size:29px;
+    }
 `;
 
 export const CardStats = styled.div`
@@ -60,7 +88,7 @@ export const CardStats = styled.div`
     grid-template-rows:1fr;
     border-bottom-left-radius:15px ;
     border-bottom-right-radius:15px ;
-    background:orangered;
+    background:brown;
 `;
 
 export const Stat = styled.div`
@@ -75,6 +103,15 @@ export const Stat = styled.div`
 export const Value = styled.div`
     font-size:22px;
     font-weight: 500;
+`;
+
+export const Page = styled.span`
+    margin:15px;
+`;
+
+export const Img = styled.img`
+    float: left;
+    margin-top:10px;
 `;
 
 export const Type = styled.div`

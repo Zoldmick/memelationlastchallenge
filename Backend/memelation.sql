@@ -19,3 +19,5 @@ id_meme				int not null,
 ds_comentario		varchar(255) not null,
 FOREIGN KEY(id_meme) REFERENCES tb_memelation(id_meme) on delete cascade
 );
+
+select * from tb_memelation;

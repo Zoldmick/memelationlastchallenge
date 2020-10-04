@@ -1,19 +1,18 @@
 import React from 'react'
-import {MenuWrapper, Img, OptionButton, Button} from './styled'
-import Memelation from '../../assets/Memelation.png'
+import { Link } from  'react-router-dom'
+import Logo from '../../assets/Memelation.png'
+import {PageDefault, NmEmpresa, Logotipo, H1} from './styled'
 
 function Header() {
     return (
-        <MenuWrapper>
-            <Img>
-                <img src = {Memelation} alt = "Logo tipo memelation do site" />
-            </Img>
-
-            <OptionButton>
-                <Button>Cadastrar</Button>
-            </OptionButton>
-
-        </MenuWrapper>
+        <PageDefault>
+            <NmEmpresa>
+                <H1>Memelation Last Challenge</H1>
+            </NmEmpresa>
+            <Logotipo>
+                <img  src = {Logo} alt="Logotipo Flagstaff Car" height='30' />
+            </Logotipo>
+        </PageDefault>
     );
 }
 

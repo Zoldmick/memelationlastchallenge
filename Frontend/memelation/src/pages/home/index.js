@@ -48,12 +48,15 @@ export default function HomePage(){
     return(
         <div>
             <ToastContainer />
-            <h1>Consultar carroussel</h1>
-            <Link to='/register'>Cadastro</Link>
+            <h1 align="center"> MEMES </h1>
+            <Link to='/register'>
+              <h5>CADASTRAR MEME</h5>
+            </Link>
             <Carousel responsive={responsive}>
                 {req.map(x =>    
-                <>
+                <div className='container-sm'>
                     <Card 
+                      key={x.id}
                       imagem={x.imagem}
                       categoria={x.categoria}
                       autor={x.autor}
@@ -66,10 +69,13 @@ export default function HomePage(){
                       id={x.id}
                       comentarios={x.comentarios}
                       />
-                </>
+                </div>
                 )}
             </Carousel>
-            <Link to='/Meme' onClick={() => alert('Certeza que quer ir a pagina dos memes adultos?')}>Pagina de memes adultos</Link>
+            <br />
+            <Link to='/Meme' onClick={() => window.confirm("Deseja entra mesmo nessa pegina, pois ela pode conter um conteudo improprio para sua")}>
+              Pagina de memes adultos
+            </Link>
         </div>
     )
 }

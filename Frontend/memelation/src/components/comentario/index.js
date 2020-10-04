@@ -1,6 +1,7 @@
 import React, { useState } from  'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Container, Comment, Button, Text } from './styled'
 import comentario from '../../services/comentario'
 const apiComentario = new comentario();
 
@@ -16,6 +17,7 @@ export default function Comentario({id, comentarios}){
             }
             console.log(req)
             const response = await apiComentario.cadastrarComentario(req)
+            document.location.reload(true)
             return response
   
         }catch(e){
@@ -25,7 +27,9 @@ export default function Comentario({id, comentarios}){
   
       const deletarComentario = async (id)  => {
         try{
+            console.log(id)
             const response = await apiComentario.deletarComentario(id);
+            document.location.reload(true)
             return response
   
         }catch(e){
@@ -36,47 +40,42 @@ export default function Comentario({id, comentarios}){
         <div>
             <ToastContainer/>
            <div>
-                <input 
+                <Comment 
                     type="text" 
                     placeholder="Digite aqui sua opnião"
+                    size="25"
                     value={msg}
                     onChange={e => setMsg(e.target.value)}/>
-                <button onClick={() => {
-                        enviarComentario(id)
-                        document.location.reload(true)
-                    }}>
-                    Enviar
-                </button>
+                <Button type="submit" title="Enviar Comentario" value="Enviar" onClick={() => enviarComentario(id) }/>
             </div>
             <div>
-                {mais == false && comentarios.length > 3  &&
+                {mais == false   &&
                      <div>
                         {comentarios.slice(0,3).map(x =>
-                            <>
-                                <p>{x.comentario}</p>
-                                <button onClick={() => deletarComentario(x.id)}>
+                            <Container>
+                                <Text>{x.comentario}</Text>
+                                <button className="btn btn-secondary" onClick={() => deletarComentario(x.id)}>
                                     Deletar
                                 </button>
-                            </>
-                            )}
-                            <button onClick={() => setMais(true)}>
-                                ler mais
-                            </button>
+                            </Container>
+                            )}{comentarios.length > 3 && 
+                                <button title="Ler mais" className="btn btn-primary" onClick={() => setMais(true)}>
+                                    Ler mais
+                                </button>
+                            }
+                            
                      </div>
                 }
-                {mais == true || comentarios.length <= 3 &&
+                {console.log(comentarios.length)}
+                {mais == true  &&
                     <div>
                         {comentarios.map(x => 
-                            <>
-                                <p>{x.comentario}</p>
-                                <button onClick={() => {
-                                    console.log(document.location.href)
-                                    document.location.reload(true)
-                                    deletarComentario(x.id)
-                                }}>
+                            <Container>
+                                <Text>{x.comentario}</Text>
+                                <button className="btn btn-secondary" onClick={() => deletarComentario(x.id)}>
                                     Deletar
                                 </button>
-                            </>)}
+                            </Container>)}
                     </div>
                 }
             </div>

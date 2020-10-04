@@ -26,7 +26,6 @@ export default class memelation {
   }
 
   async consultar(maior){
-    console.log(maior)
     const response =  await api.get(`Meme?maior=${maior}`)
     console.dir(response.data)
     return response.data
